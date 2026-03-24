@@ -1,0 +1,12 @@
+[
+  {
+    "id": "recon_34.78dB",
+    "image_path": "images/recon_15000_34.78dB_ssim0.8552.png",
+    "ground_truth": "特征提取：实性结节，边缘毛刺。病灶定位：右肺上叶。良恶性概率：高度恶性(Lung-RADS 4B)。临床建议：PET-CT评估，穿刺活检。"
+  },
+  {
+    "id": "recon_34.78dB",
+    "image_path": "images/recon_15000_34.78dB_ssim0.8552.png",
+    "ground_truth": "特征提取：低密度灶，边缘结节状强化。病灶定位：肝右叶后段。良恶性概率：良性血管瘤。临床建议：年度超声随访。"
+  }
+]
