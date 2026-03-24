@@ -1,0 +1,21 @@
+# 1. 忽略 Python 的编译缓存文件
+__pycache__/
+*.py[cod]
+
+# 2. 忽略数据集和大型矩阵文件（极其重要！这就是那 1.73GB 的来源）
+data/
+ct_mat/
+
+# 3. 忽略本地运行的结果和输出目录
+Result/
+
+# 4. 忽略不参与代码运行的文献资料
+*.pdf
+
+# 5. 忽略 Docker 配置文件本身（容器内不需要这些）
+Dockerfile
+.dockerignore
+
+# 6. 忽略可能存在的 Git 记录（以防万一）
+.git
+.gitignore
