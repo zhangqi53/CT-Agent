@@ -1,0 +1,29 @@
+# LAMA baseline configuration file
+
+# train algorithm for 15 iterations (phases)
+n_iter: 15
+
+# hyper-parameters
+alpha: 1.e-12 
+beta: 1.e-12 
+mu: 1.e-12
+nu: 1.e-12
+lam: 10.0
+
+img_backbone:
+  # I: image networks, Conv2D: convolutional layer
+  # [in_channels, out_channels, kernel_size, stride, padding]
+ [[I, Conv2D, [1,  32, 3, 1, 1]],
+  [I, Conv2D, [32, 32, 3, 1, 1]],
+  [I, Conv2D, [32, 32, 3, 1, 1]],
+  [I, Conv2D, [32, 32, 3, 1, 1]],
+]
+
+sinogram_backbone:
+  # S: sinogram networks, Conv2D: convolutional layer
+  # [in_channels, out_channels, kernel_size, stride, padding]
+ [[S, Conv2D, [1,  32, '(3,15)', 1, '(1,7)']],
+  [S, Conv2D, [32, 32, '(3,15)', 1, '(1,7)']],
+  [S, Conv2D, [32, 32, '(3,15)', 1, '(1,7)']],
+  [S, Conv2D, [32, 32, '(3,15)', 1, '(1,7)']],
+ ]
