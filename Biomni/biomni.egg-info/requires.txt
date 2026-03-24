@@ -1,0 +1,6 @@
+pydantic
+langchain
+python-dotenv
+
+[gradio]
+gradio<6.0,>=5.0
