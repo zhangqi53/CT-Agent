@@ -1,0 +1,5 @@
+FROM biomni-tool-3dgr-ct:v2
+
+USER root
+# 创建原作者的专属目录，并用软链接把它映射到我们的 /app 目录
+RUN mkdir -p /data/yingtaili/ && ln -s /app /data/yingtaili/3DGR-CT-archive
