@@ -106,6 +106,12 @@
 | V-LI06 | `multi_lesion_detection_tagging` | 多器官病灶联合检测+标签 | MULAN (Yan et al., MICCAI 2019, 150+ cites) | [MULAN](https://github.com/ke-yan/MULAN) |
 | V-LI07 | `pancreas_segmentation` | 胰腺实质分割 | Attention U-Net (Oktay et al., MIDL 2018, 5000+ cites) | [Attention-Gated-Networks](https://github.com/ozan-oktay/Attention-Gated-Networks) |
 | V-LI08 | `pelvic_fracture_detection` | 骨盆骨折检测 | CTPelvic1K (Liu et al., MICCAI 2021) | [CTPelvic1K](https://github.com/ICT-MIRACLE-lab/CTPelvic1K) |
+| V-LI09 | `aortic_dissection_detection` | 主动脉夹层检测 + Stanford A/B 分型 | Brainma et al., Diagnostics 2024 (Sens 0.97/0.95) | [aortic_dissection_det](https://github.com/brainma/aortic_dissection_det_pytorch) |
+| V-LI10 | `pleural_effusion_detection` | 胸腔积液检测 + 分割 + 量化 + 简单/复杂分类 | Sexauer et al., **Invest Radiol** 2022 (AUC 0.996) | [pleuraleffusion](https://github.com/usb-radiology/pleuraleffusion) |
+| V-LI11 | `kidney_stone_detection` | 肾结石检测 | Yildirim et al., Comput Biol Med 2021 (Acc 96.8%) | [Kidney_stone_detection](https://github.com/muhammedtalo/Kidney_stone_detection) |
+| V-LI12 | `adrenal_lesion_screening` | 肾上腺病灶筛查 + 体积测量 | NHS AI Lab (medRxiv 2023, AUC 0.95) + Auto-Adrenal (Eur J Radiol 2025) | [skunkworks-adrenal](https://github.com/nhsx/skunkworks-adrenal-lesions-detection) |
+| V-LI13 | `liver_lesion_classification` | 肝脏病灶分类（HCC/转移/良性 6 亚型） | LiLNet (Focal Liver Lesion, **Nature Comms** 2024, AUC 97.2%) | 部分代码公开 |
+| V-LI14 | `spleen_volumetry` | 脾脏体积测量 + 脾肿大判断 | TotalSegmentator 分割 + 体重校正阈值 (AJR 2023) | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
 
 ### 3.6 L3 感知层 — 头颅/脑部专用工具
 
@@ -162,15 +168,21 @@
 | R02 | `staging_engine` | TNM 分期（NLP 方式） | BBTEN (Tatonetti Lab, **Nature Comms**, 23 癌种) | [tnm-stage-classifier](https://github.com/tatonetti-lab/tnm-stage-classifier) |
 | R03 | `differential_diagnosis` | 鉴别诊断列表 + 支持/反对证据 | RadFM (Wu et al., **Nature Comms** 2025, 支持 3D CT) | [RadFM](https://github.com/chaoyi-wu/RadFM) |
 | R04 | `lung_nodule_malignancy` | Lung-RADS 评级 + 恶性概率 | Sybil (Mikhael et al., **J Clin Oncol** 2023) | [Sybil](https://github.com/reginabarzilaygroup/Sybil) |
+| R05 | `c_lung_rads_scoring` | 肺结节风险分级（决策树+CNN+多维模型） | C-Lung-RADS (Shi, Qian et al., **Nature Medicine** 2024, AUC 0.918) | [C-Lung-RADS](https://github.com/simonsf/C-Lung-RADS) |
+| R06 | `aspects_scoring` | 脑卒中 ASPECTS 评分（NCCT） | DA-Net (Cao et al., Human Brain Mapping 2022, Sens 93.7%) | [ct-aspects](https://github.com/simonsf/ct-aspects) |
+| R07 | `coronary_stenosis_grading` | 冠脉狭窄检测（≥50%/≥70%） | DL Stenosis Detection (Open Heart/BMJ 2025, AUC>0.94) | [DL-Coronary-Stenosis](https://github.com/Vibha190685/DL-for-Detection-of-Coronary-Artery-Stenosis) |
+| R08 | `liver_lesion_malignancy` | 肝脏良恶性分类 + 亚型 | LiLNet (**Nature Comms** 2024, 6 中心 4039 例) | 部分代码 |
 
 ### 3.12 L7 输出层
 
 | ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
 |----|--------|------|----------|---------|
-| O01 | `report_generator` | 3D CT → 结构化影像报告 | FORTE/BrainGPT (charlierabea, **Nature Comms** 2025) | [FORTE](https://github.com/charlierabea/FORTE) |
-| O02 | `fhir_exporter` | 结构化报告 → HL7 FHIR 格式 | 纯模板映射 | 自建 |
-| O03 | `critical_finding_alert` | 紧急/偶发发现分级告警 | TotalSegmentator 测量 + 阈值规则 | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
-| O04 | `report_quality_scorer` | 报告质量自评 | LLM rubric 评分 | 自建 |
+| O01 | `report_generator_brain` | 3D 脑部 CT → 结构化报告 | FORTE/BrainGPT (charlierabea, **Nature Comms** 2025) | [FORTE](https://github.com/charlierabea/FORTE) |
+| O02 | `report_generator_chest` | 3D 胸部 CT → 结构化报告 | CT2Rep (Hamamci et al., **MICCAI** 2024, 25692 volumes) | [CT2Rep](https://github.com/ibrahimethemhamamci/CT2Rep) |
+| O03 | `report_generator_abdomen` | 3D 腹部 CT → 肿瘤报告 | RadGPT (Bassi et al., **ICCV** 2025, AbdomenAtlas 9262 volumes) | [RadGPT](https://github.com/MrGiovanni/RadGPT) |
+| O04 | `fhir_exporter` | 结构化报告 → HL7 FHIR 格式 | 纯模板映射 | 自建 |
+| O05 | `critical_finding_alert` | 紧急/偶发发现分级告警 | TotalSegmentator 测量 + 阈值规则 | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
+| O06 | `report_quality_scorer` | 报告质量自评 | LLM rubric 评分 | 自建 |
 
 ---
 
@@ -199,32 +211,39 @@
 | L2 文本层 | 6 |
 | L3 感知层 — 通用 | 7 |
 | L3 感知层 — 肺部 | 9 |
-| L3 感知层 — 肝脏/腹部 | 8 |
+| L3 感知层 — 肝脏/腹部 | 14 |
 | L3 感知层 — 头颅/脑部 | 7 |
 | L3 感知层 — 心脏 | 4 |
 | L3 感知层 — 脊柱/骨骼 | 6 |
 | L4 定量层 | 3 |
 | L5 融合层 | 2 |
-| L6 推理层 | 4 |
-| L7 输出层 | 4 |
-| **正式工具合计** | **66** |
+| L6 推理层 | 8 |
+| L7 输出层 | 6 |
+| **正式工具合计** | **78** |
 | 干扰工具 | 8 |
-| **总计** | **74** |
+| **总计** | **86** |
 
 ---
 
 ## 6. 已知空白与风险
 
-| 空白 | 影响 | 缓解方案 |
-|------|------|---------|
-| **LI-RADS 影像自动分期** | 肝脏 T9 IMG/MM 无现成模型 | TotalSegmentator 特征 + LLM 规则推理 |
-| **Lung-RADS 影像自动评级** | 肺部 T9 IMG（Sybil 可部分覆盖） | Sybil 恶性概率 + 结节形态特征 |
-| **体部 CT 报告生成** | T8 IMG/MM 无 3D→text 模型（FORTE 仅脑部） | FORTE 架构迁移或 LLM + 结构化 prompt |
-| **ASPECTS 自动评分** | 脑部 T9 无开源方案（RAPID 商用） | DeepMedic 分割 + 区域 HU 分析 |
-| **端到端 RECIST** | detect-then-track 仅验证肝脏 | nnDetection + ULS23 组装 |
-| **肠梗阻检测** | 腹部专用检测无开源 | 通用病灶检测 + LLM 判断 |
-| **心包积液检测** | 心脏专用无独立工具 | TotalSegmentator 心包分割 + 体积阈值 |
-| **脊柱管狭窄分级** | 无成熟开源方案 | TotalSegmentator 椎管分割 + 截面积计算 |
+| 空白 | 影响 | 缓解方案 | 状态 |
+|------|------|---------|------|
+| **LI-RADS 影像自动分期** | 肝脏 T9 IMG/MM | LiLNet 分类 + LLM 规则推理映射到 LI-RADS | ⚠️ 无直接开源工具 |
+| ~~Lung-RADS 评级~~ | ~~肺部 T9~~ | ~~已有 C-Lung-RADS (Nature Med 2024)~~ | ✅ 已填补 |
+| ~~体部 CT 报告生成~~ | ~~T8 IMG/MM~~ | ~~CT2Rep (胸部) + RadGPT (腹部)~~ | ✅ 已填补 |
+| ~~ASPECTS 自动评分~~ | ~~脑部 T9~~ | ~~DA-Net (Human Brain Mapping 2022)~~ | ✅ 已填补 |
+| **端到端 RECIST** | detect-then-track 仅验证肝脏 | nnDetection + ULS23 组装 | ⚠️ 泛化性未知 |
+| **肠梗阻检测** | 腹部 T2 胃肠道 | 通用病灶检测 + LLM；论文有但代码未公开 (Eur Radiol 2024) | ❌ 无开源 |
+| **阑尾炎检测** | 腹部 T2 胃肠道 | AppendiXNet (Stanford, Sci Rep 2020) 代码未公开 | ❌ 无开源 |
+| **胆结石检测** | 胆囊 T2 | YOLOv3 (PLOS ONE 2019) 代码未公开 | ❌ 无开源 |
+| **CT 气胸检测** | 肺部 T12 | lungmask 预处理 + 自建分割；CXR 有但 CT 无开源 | ❌ 无开源 |
+| **心包积液检测** | 心脏 T12 | TotalSegmentator 心包分割 + 体积阈值 | ⚠️ 间接方案 |
+| **脊柱管狭窄分级** | 脊柱 T9 | TotalSegmentator 椎管分割 + 截面积计算 | ⚠️ 间接方案 |
+| **Bosniak 肾囊肿分级** | 肾脏 T9 | 无开源；需 pyradiomics 纹理 + 规则引擎 | ❌ 无开源 |
+| **胰腺炎严重度 (CTSI)** | 胰腺 T9 | 无开源影像工具；仅有临床变量 ML | ❌ 无开源 |
+| **Fleischner 偶发结节管理** | 肺部 T12 | 结节检测+测量+密度分类已有，缺集成管线 | ⚠️ 组件存在 |
+| **结节 VDT 纵向计算** | 肺部 T7 | 分割+配准组件已有，无集成工具；商用系统有 | ⚠️ 组件存在 |
 
 ---
 
@@ -249,5 +268,11 @@
 | **MedSAM** | Ma et al. | Nature Comms 2024 | 300+ | Apache 2.0 | 1 |
 | **Comp2Comp** | Stanford AIMI | Radiology 2021 | 150+ | — | 1 |
 | **FORTE** | charlierabea | Nature Comms 2025 | — | — | 1 |
+| **C-Lung-RADS** | Shi, Qian et al. | Nature Medicine 2024 | — | — | 1 |
+| **CT2Rep** | Hamamci et al. | MICCAI 2024 | — | — | 1 |
+| **RadGPT** | Bassi et al. | ICCV 2025 | — | — | 1 |
+| **DA-Net (ASPECTS)** | Cao et al. | Human Brain Mapping 2022 | — | — | 1 |
+| **LiLNet** | Nature Comms 2024 | Nature Comms 2024 | — | — | 2 |
+| **pleuraleffusion** | Sexauer et al. | Invest Radiol 2022 | — | — | 1 |
 | **llm_extractinator** | van Driel et al. | arXiv 2025 | — | Apache 2.0 | 2 |
 | **pydicom** | Mason et al. | — | — | MIT | 1 |
