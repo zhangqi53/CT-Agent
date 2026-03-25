@@ -1,9 +1,9 @@
 # CT-Agent MCP 工具包设计
 
-> 版本: 0.2 | 日期: 2025-03-25
+> 版本: 0.3 | 日期: 2025-03-25
 >
 > 本文档定义 CT 智能体 benchmark 所需的全部 MCP 工具，
-> 以及每个工具背后对应的**开源项目选型**。
+> 以及每个工具背后对应的**权威论文 + 开源实现**。
 >
 > 智能体在执行任务时，需要**自主决定**调用哪些工具、以什么顺序调用——
 > 这正是 benchmark 要评测的核心能力。
@@ -44,124 +44,198 @@
 
 ---
 
-## 3. MCP 工具清单与开源项目选型
+## 3. 完整工具清单
 
-### 3.1 L1 预处理层
+### 3.1 L1 预处理层（通用）
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| P01 | `dicom_loader` | 加载 DICOM → 标准化 3D 体积（LPS+ 方向、HU 校准） | **SimpleITK** `ImageSeriesReader` | pydicom | SimpleITK 一个调用完成方向归一化+重采样；pydicom 用于元数据级访问 |
-| P02 | `window_level` | 窗宽窗位变换（预设 / 自定义 WW/WL） | **MONAI** `ScaleIntensityRange` | SimpleITK `IntensityWindowing` | MONAI 内置常见 CT 预设，callable 模式易包装 |
-| P03 | `image_registration` | 刚性 / 仿射 / 形变配准（纵向对比用） | **ANTsPy** `ants.registration()` | SimpleITK `ImageRegistrationMethod` | ANTsPy SyN 是医学配准金标准，单函数调用 |
-| P04 | `scan_quality_check` | 伪影 / 噪声 / 层厚 / 对比剂时相评估 | **MONAI** `DataAnalyzer` + 自定义规则 | TorchIO 强度统计 | 暂无专用开源工具，需基于 MONAI 统计模块 + 规则引擎组装 |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| P01 | `dicom_loader` | 加载 DICOM → 标准化 3D 体积（LPS+、HU 校准） | SimpleITK (Lowekamp et al., Frontiers 2013) | [SimpleITK](https://github.com/SimpleITK/SimpleITK) |
+| P02 | `dicom_metadata_reader` | 读取 DICOM tag（患者/扫描参数/对比剂） | pydicom (Mason et al.) | [pydicom](https://github.com/pydicom/pydicom) |
+| P03 | `window_level` | 窗宽窗位变换（8 种预设 + 自定义） | MONAI (Cardoso et al., arXiv 2022) | [MONAI](https://github.com/Project-MONAI/MONAI) |
+| P04 | `image_registration` | 刚性/仿射/SyN 形变配准 | ANTs (Avants et al., NeuroImage 2011, 10000+ cites) | [ANTsPy](https://github.com/ANTsX/ANTsPy) |
+| P05 | `scan_quality_check` | 伪影/噪声/层厚/对比剂时相评估 | MONAI DataAnalyzer + 自定义规则 | [MONAI](https://github.com/Project-MONAI/MONAI) |
+| P06 | `body_region_classifier` | 自动识别 CT 覆盖的身体部位 | 基于 TotalSegmentator 输出推断 | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
 
 ### 3.2 L2 文本层
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| T01 | `clinical_signal_extractor` | 从病历文本提取异常临床信号 | **medspaCy** | scispaCy | 规则 + ConText 否定检测，适合临床信号筛查 |
-| T02 | `report_ner` | 从 CT 报告抽取病灶实体（位置/大小/形态/密度） | **RadGraph-XL** (Stanford AIMI) | medspaCy TargetMatcher | RadGraph-XL 是少数**在 CT 报告上训练过**的 NER/RE 模型（ACL 2024） |
-| T03 | `classification_label_extractor` | 从文本抽取分类标签及证据 | **NegBio** + RadLex 术语表 | CheXbert（胸部限定） | NegBio 否定/不确定检测是模态无关的；CheXbert 仅覆盖 14 个 CXR 观察项 |
-| T04 | `measurement_extractor` | 从报告抽取测量数值（"3.2 × 2.1 cm 肿块"） | **llm_extractinator** (DIAG Nijmegen) | medspaCy 正则规则 | 在 CT 胸腹报告上验证过 RECIST 测量抽取，准确率 93.7% |
-| T05 | `temporal_report_aligner` | 多份时序报告对齐与变化抽取 | **llm_extractinator** 纵向管线 | — | 唯一在纵向 CT 报告对上验证过的开源工具（arXiv 2025） |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| T01 | `clinical_signal_extractor` | 病历文本异常信号提取 + 否定检测 | medspaCy (Eyre et al., JAMIA 2021) | [medspaCy](https://github.com/medspacy/medspacy) |
+| T02 | `report_ner` | CT 报告实体抽取（位置/大小/形态/密度/关系） | RadGraph-XL (Jain et al., ACL 2024，训练集含 CT) | [RadGraph](https://github.com/Stanford-AIMI/radgraph) |
+| T03 | `classification_label_extractor` | 从文本抽取诊断标签 + 断言状态 | NegBio (Peng et al., EMNLP 2018) | [NegBio](https://github.com/ncbi-nlp/NegBio) |
+| T04 | `measurement_extractor` | 报告测量数值抽取（RECIST 径线等） | llm_extractinator (van Driel et al., arXiv 2025, 93.7% acc) | [llm_extractinator](https://github.com/DIAGNijmegen/llm_extractinator) |
+| T05 | `temporal_report_aligner` | 多份时序报告对齐 + 变化抽取 | "Tracking Cancer Through Text" (van Driel et al., arXiv 2025) | [llm_extractinator](https://github.com/DIAGNijmegen/llm_extractinator) |
+| T06 | `medical_knowledge_lookup` | 查询分期标准/指南/鉴别要点 | 自建 RAG 知识库 | — |
 
-### 3.3 L3 感知层
+### 3.3 L3 感知层 — 通用工具
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| V01 | `abnormality_screening` | 全局二分类：正常 vs 异常 | **MONAI** 分类网络 (DenseNet121/ViT) | — | 无专用项目，用 MONAI 3D 分类器 + 预训练权重微调 |
-| V02 | `lesion_detection` | 3D 病灶检测 → bbox | **nnDetection** (DKFZ) | MONAI Detection (RetinaNet) | nnDetection 自配置，LUNA16 等多个挑战赛冠军 |
-| V03 | `lesion_segmentation` | 3D 病灶体素级分割 | **nnU-Net v2** (DKFZ) | SAM-Med3D / MedSAM2 | nnU-Net 是医学分割金标准；SAM-Med3D 适合交互式 prompt 分割 |
-| V04 | `anatomy_segmentation` | 多器官 / 解剖结构分割（117 类） | **TotalSegmentator** | MONAI Auto3DSeg | 一个命令分割 117 个解剖结构，Radiology 2023 发表 |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| V01 | `anatomy_segmentation` | 117 类全身解剖结构分割 | TotalSegmentator (Wasserthal et al., Radiology:AI 2023, 600+ cites) | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
+| V02 | `universal_lesion_detection` | 全身通用病灶检测 (3D bbox) | DeepLesion (Yan et al., J Med Imaging 2018, 400+ cites) | [CADLab](https://github.com/rsummers11/CADLab) |
+| V03 | `universal_lesion_segmentation` | 全身通用病灶分割 | ULS23 (DIAG, MedIA 2025) + nnU-Net v2 | [ULS23](https://github.com/DIAGNijmegen/ULS23) |
+| V04 | `abnormality_screening` | 全局二分类：正常 vs 异常 | MONAI 3D 分类网络 (DenseNet121/ViT) | [MONAI](https://github.com/Project-MONAI/MONAI) |
+| V05 | `interactive_segmentation` | 基于 prompt（点击/bbox）的交互式 3D 分割 | MedSAM (Ma et al., Nature Comms 2024, 300+ cites) | [MedSAM](https://github.com/bowang-lab/MedSAM) |
 
-### 3.4 L4 定量层
+### 3.4 L3 感知层 — 肺部专用工具
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| Q01 | `lesion_measurement` | 三径测量 + 体积 + CT 值统计 | **MONAI VISTA3D** + pyradiomics | MedSAM2 (RECIST→3D) | VISTA3D 分割后用 pyradiomics 提取形状和密度特征 |
-| Q02 | `volume_change_calculator` | 两时间点体积 / 径线变化率 | **自建**（基于 Q01 + P03 输出计算） | — | 纯数值计算，无需专用项目 |
-| Q03 | `recist_evaluator` | RECIST 1.1 治疗响应评估 | **detect-then-track** (alibool) | ULS23 (DIAG Nijmegen) | 唯一端到端 RECIST 评估开源管线（JIMM 2025），肝脏验证 |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| V-LU01 | `lung_nodule_detection` | 肺结节 3D 检测 | nnDetection (Baumgartner et al., MICCAI 2021, 200+ cites) | [nnDetection](https://github.com/MIC-DKFZ/nnDetection) |
+| V-LU02 | `lung_nodule_segmentation` | 肺结节体素级分割 | nnU-Net (Isensee et al., Nature Methods 2021, 7000+ cites) | [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) |
+| V-LU03 | `lung_lobe_segmentation` | 肺叶分割（5 叶） | TotalSegmentator / MONAI Lung Lobe bundle | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
+| V-LU04 | `pulmonary_embolism_detection` | 肺栓塞检测（CTA） | RSNA PE Detection Challenge (2020, Kaggle) | 多个开源方案 |
+| V-LU05 | `pneumonia_quantification` | 肺炎/COVID 病灶分割与体积量化 | nnU-Net on COVID-19-20 Challenge (MedIA) | [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) |
 
-### 3.5 L5 融合层
+### 3.5 L3 感知层 — 肝脏/腹部专用工具
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| F01 | `multimodal_evidence_fusion` | 聚合影像特征 + 文本证据 → 融合置信度 | **自建**（LLM 推理链） | — | 无成熟开源项目；由 LLM 基于各工具输出做结构化推理 |
-| F02 | `modality_attribution` | 各模态对结论的贡献度分析 | **自建**（LLM 推理链） | — | 同上，由 LLM 输出归因分析 |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| V-LI01 | `liver_tumor_segmentation` | 肝脏肿瘤分割 | LiTS Benchmark (Bilic et al., MedIA 2023, 600+ cites) + nnU-Net | [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) |
+| V-LI02 | `pancreas_lesion_detection` | 胰腺癌检测（非增强 CT） | FELIX (Cao et al., **Nature Medicine** 2023, 150+ cites) | [FELIX](https://github.com/chencancan1018/FELIX) |
+| V-LI03 | `kidney_tumor_segmentation` | 肾脏肿瘤分割 | KiTS Challenge (Heller et al., MedIA 2023, 400+ cites) + nnU-Net | [KiTS](https://github.com/neheller/kits19) |
+| V-LI04 | `lymph_node_detection` | 腹部淋巴结检测 | NIH CADLab (Summers et al., Radiology:AI) | [CADLab](https://github.com/rsummers11/CADLab) |
+| V-LI05 | `aortic_measurement` | 主动脉直径/形态测量 | VMTK (Antiga et al., 800+ cites) | [VMTK](https://github.com/vmtk/vmtk) |
+| V-LI06 | `multi_lesion_detection_tagging` | 多器官病灶联合检测+标签 | MULAN (Yan et al., MICCAI 2019, 150+ cites) | [MULAN](https://github.com/ke-yan/MULAN) |
 
-### 3.6 L6 推理层
+### 3.6 L3 感知层 — 头颅/脑部专用工具
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| R01 | `malignancy_classifier` | 良恶性及亚型分类 | **肺**: AI-in-Lung-Health (fitushar) | **肝**: T-CACE (xiaojiao929) | 肺结节多数据集验证 AUC 0.71-0.90；肝脏无造影剂方案 |
-| R02 | `staging_engine` | TNM / Lung-RADS / LI-RADS 分期 | **tnm-stage-classifier** (tatonetti-lab) | — | BERT 系 NLP 分期（Nature Comms）；⚠️ 影像分期无开源方案，Lung-RADS/LI-RADS 是已知空白 |
-| R03 | `differential_diagnosis` | 鉴别诊断列表 + 支持/反对证据 | **RadFM** (chaoyi-wu) | LLaVA-Med (Microsoft) | RadFM 支持 3D CT 直接输入，Nature Comms 2025；LLaVA-Med 仅 2D |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| V-BR01 | `intracranial_hemorrhage_detection` | 颅内出血检测与 5 亚型分类 | Chilamkurthy et al., **Lancet** 2018, 900+ cites; RSNA ICH 2019 | [RSNA ICH Top1](https://github.com/SeuTao/RSNA2019_Intracranial-Hemorrhage-Detection) |
+| V-BR02 | `hemorrhage_segmentation` | 出血体素级分割 + 体积量化 | DeepBleed (3D U-Net) | [DeepBleed](https://github.com/msharrock/deepbleed) |
+| V-BR03 | `brain_lesion_segmentation` | 脑部病灶通用分割 | DeepMedic (Kamnitsas et al., MedIA 2017, 2500+ cites) | [DeepMedic](https://github.com/deepmedic/deepmedic) |
+| V-BR04 | `midline_shift_measurement` | 脑中线偏移测量 (mm) | Wei et al., MICCAI/TMI 2018-2020 | [midline-shift](https://github.com/xf4j/midline-shift) |
+| V-BR05 | `aneurysm_detection` | CTA 脑动脉瘤检测 | Shi et al., **Nature Communications** 2020, 300+ cites | 部分代码公开 |
 
-### 3.7 L7 输出层
+### 3.7 L3 感知层 — 心脏专用工具
 
-| ID | 工具名 | 功能 | 首选项目 | 备选 | 说明 |
-|----|--------|------|---------|------|------|
-| O01 | `report_generator` | 四段式结构化影像报告生成 | **FORTE/BrainGPT** (charlierabea) | RaDialog | FORTE 从 3D CT 生成报告（Nature Comms 2025），目前仅脑部；体部报告是空白 |
-| O02 | `fhir_exporter` | 结构化报告 → HL7 FHIR 格式 | **自建**（JSON 模板映射） | — | 纯格式转换，无需 ML 模型 |
-| O03 | `critical_finding_alert` | 紧急 / 偶发关键发现分级告警 | **TotalSegmentator** + 阈值规则 | INFORM-CT（未开源） | 通过解剖测量触发告警（如主动脉直径 > 阈值）；INFORM-CT 最直接但代码未公开 |
-| O04 | `report_quality_scorer` | 报告质量自评 | **自建**（LLM 评分） | — | 用 LLM 按结构化 rubric 评分 |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| V-CA01 | `calcium_scoring` | 冠脉钙化积分（Agatston Score） | Lessmann et al., **TMI** 2018, 350+ cites | [CalciumScoring](https://github.com/lessmann/CalciumScoring) |
+| V-CA02 | `coronary_segmentation` | 冠脉树分割（CTA） | ImageCAS (Zeng et al., MedIA 2023) | [ImageCAS](https://github.com/XiaoweiXu/ImageCAS-A-Large-Scale-Dataset-and-Benchmark-for-Coronary-Artery-Segmentation) |
+| V-CA03 | `cardiac_chamber_segmentation` | 心腔分割（4 腔 + 大血管） | MM-WHS (Zhuang & Shen, TMI 2019, 400+ cites) | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
 
-### 3.8 辅助工具
+### 3.8 L3 感知层 — 脊柱/骨骼专用工具
 
-| ID | 工具名 | 功能 | 首选项目 | 说明 |
-|----|--------|------|---------|------|
-| U01 | `medical_knowledge_lookup` | 查询分期标准 / 指南 / 鉴别要点 | **自建** RAG 或知识表 | 静态知识库，不需要 ML |
-| U02 | `body_region_classifier` | 自动识别 CT 覆盖的身体部位 | **TotalSegmentator** 输出推断 | 根据分割到的解剖结构判断部位 |
-| U03 | `dicom_metadata_reader` | 读取 DICOM 元数据 | **pydicom** | 纯元数据读取 |
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| V-SP01 | `vertebra_segmentation_labeling` | 椎体实例分割 + 解剖标记 (C1-L5) | VerSe (Sekuboyina et al., MedIA 2021, 300+ cites) | [VerSe](https://github.com/anjany/verse) |
+| V-SP02 | `vertebral_fracture_detection` | 椎体压缩性骨折检测 | Burns et al., Radiology 2020 / VerSe 衍生 | [VerSe](https://github.com/anjany/verse) |
+| V-SP03 | `rib_fracture_detection` | 肋骨骨折检测 + 分类 | RibFrac Challenge (Jin et al., Radiology:AI 2021, MedIA 2024) | [FracNet](https://github.com/M3DV/FracNet) |
+| V-SP04 | `bone_density_estimation` | CT 机会性骨密度估计 | Löffler et al., Radiology 2022; Pickhardt et al., AIM 2013, 700+ cites | TotalSegmentator + HU 分析 |
+| V-SP05 | `body_composition_analysis` | 肌肉/脂肪量化（L3 层面） | Koitka et al., Radiology 2021 / Stanford AIMI | [Comp2Comp](https://github.com/StanfordMIMI/Comp2Comp) |
+
+### 3.9 L4 定量层
+
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| Q01 | `lesion_measurement` | 三径测量 + 体积 + CT 值 + 形状特征 | pyradiomics (van Griethuysen et al., Cancer Research 2017, 3000+ cites) | [pyradiomics](https://github.com/AIM-Harvard/pyradiomics) |
+| Q02 | `volume_change_calculator` | 两时间点体积/径线变化率 | 纯数值计算（基于 Q01 + P04 输出） | 自建 |
+| Q03 | `recist_evaluator` | RECIST 1.1 治疗响应评估 | detect-then-track (alibool, JIMM 2025) | [detect-then-track](https://github.com/alibool/detect-then-track) |
+
+### 3.10 L5 融合层
+
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| F01 | `multimodal_evidence_fusion` | 影像特征 + 文本证据 → 融合置信度 | LLM 结构化推理链 | 自建 |
+| F02 | `modality_attribution` | 各模态对结论的贡献度分析 | LLM 归因分析 | 自建 |
+
+### 3.11 L6 推理层
+
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| R01 | `malignancy_classifier` | 良恶性及亚型分类 | **肺**: AI-in-Lung-Health (fitushar, multi-dataset AUC 0.71-0.90) | [AI-Lung-Health](https://github.com/fitushar/AI-in-Lung-Health-Benchmarking-Detection-and-Diagnostic-Models-Across-Multiple-CT-Scan-Datasets) |
+| R02 | `staging_engine` | TNM 分期（NLP 方式） | BBTEN (Tatonetti Lab, **Nature Comms**, 23 癌种) | [tnm-stage-classifier](https://github.com/tatonetti-lab/tnm-stage-classifier) |
+| R03 | `differential_diagnosis` | 鉴别诊断列表 + 支持/反对证据 | RadFM (Wu et al., **Nature Comms** 2025, 支持 3D CT) | [RadFM](https://github.com/chaoyi-wu/RadFM) |
+| R04 | `lung_nodule_malignancy` | Lung-RADS 评级 + 恶性概率 | Sybil (Mikhael et al., **J Clin Oncol** 2023) | [Sybil](https://github.com/reginabarzilaygroup/Sybil) |
+
+### 3.12 L7 输出层
+
+| ID | 工具名 | 功能 | 论文/来源 | 开源实现 |
+|----|--------|------|----------|---------|
+| O01 | `report_generator` | 3D CT → 结构化影像报告 | FORTE/BrainGPT (charlierabea, **Nature Comms** 2025) | [FORTE](https://github.com/charlierabea/FORTE) |
+| O02 | `fhir_exporter` | 结构化报告 → HL7 FHIR 格式 | 纯模板映射 | 自建 |
+| O03 | `critical_finding_alert` | 紧急/偶发发现分级告警 | TotalSegmentator 测量 + 阈值规则 | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
+| O04 | `report_quality_scorer` | 报告质量自评 | LLM rubric 评分 | 自建 |
 
 ---
 
 ## 4. 干扰工具（Distractor Tools）
 
-这些工具故意包含在工具包中，智能体**不应选用**它们。用于测试工具选择能力。
+不应被选用，测试工具选择能力。
 
 | ID | 工具名 | 伪描述 | 干扰类型 |
 |----|--------|--------|---------|
 | D01 | `mri_lesion_detection` | 在 MRI 序列中检测病灶 | **模态错误**：本系统只处理 CT |
-| D02 | `xray_abnormality_screen` | 对 X 光片进行异常筛查 | **模态错误**：不是 CT |
-| D03 | `pet_ct_fusion` | PET-CT 代谢与形态融合 | **模态错误**：没有 PET 数据 |
-| D04 | `lesion_detection_2d` | 在单张 2D 切片上检测病灶 | **降维错误**：应该用 3D 检测 |
-| D05 | `deprecated_segmentation_v1` | [已废弃] 旧版分割工具 | **版本错误**：已标记废弃 |
-| D06 | `ct_reconstruction` | 从正弦图重建 CT 图像 | **任务错误**：重建不属于诊断流程 |
+| D02 | `xray_abnormality_screen` | 对 X 光片进行异常筛查 | **模态错误** |
+| D03 | `pet_ct_fusion` | PET-CT 代谢融合分析 | **模态错误**：没有 PET 数据 |
+| D04 | `lesion_detection_2d` | 在单张 2D 切片上检测 | **降维错误**：应用 3D |
+| D05 | `deprecated_segmentation_v1` | [已废弃] 旧版分割 | **版本错误** |
+| D06 | `ct_reconstruction` | 正弦图重建 CT 图像 | **任务错误**：不属于诊断 |
+| D07 | `ultrasound_liver_screen` | 超声肝脏筛查 | **模态错误** |
+| D08 | `mammography_detection` | 乳腺 X 光检测 | **模态+部位错误** |
 
 ---
 
-## 5. 已知空白与风险
+## 5. 工具统计
+
+| 类别 | 数量 |
+|------|------|
+| L1 预处理层 | 6 |
+| L2 文本层 | 6 |
+| L3 感知层 — 通用 | 5 |
+| L3 感知层 — 肺部 | 5 |
+| L3 感知层 — 肝脏/腹部 | 6 |
+| L3 感知层 — 头颅/脑部 | 5 |
+| L3 感知层 — 心脏 | 3 |
+| L3 感知层 — 脊柱/骨骼 | 5 |
+| L4 定量层 | 3 |
+| L5 融合层 | 2 |
+| L6 推理层 | 4 |
+| L7 输出层 | 4 |
+| **正式工具合计** | **54** |
+| 干扰工具 | 8 |
+| **总计** | **62** |
+
+---
+
+## 6. 已知空白与风险
 
 | 空白 | 影响 | 缓解方案 |
 |------|------|---------|
-| **Lung-RADS / LI-RADS 影像分期**无开源方案 | T9 影像模态无法用现成模型 | 用 TotalSegmentator 提取解剖特征 + LLM 规则推理 |
-| **体部 CT 报告生成**无 3D→text 开源模型 | T8 IMG/MM 模态需要自建 | FORTE 架构迁移或 LLM + 结构化 prompt |
-| **关键发现检测** INFORM-CT 代码未公开 | T12 无端到端方案 | TotalSegmentator 测量 + 阈值规则 + LLM 分级 |
-| **端到端 RECIST** detect-then-track 仅验证肝脏 | T7 其他部位泛化性未知 | 需额外验证或用 nnDetection + ULS23 组装 |
+| **LI-RADS 影像自动分期** | 肝脏 T9 IMG/MM 无现成模型 | TotalSegmentator 特征 + LLM 规则推理 |
+| **Lung-RADS 影像自动评级** | 肺部 T9 IMG（Sybil 可部分覆盖） | Sybil 恶性概率 + 结节形态特征 |
+| **体部 CT 报告生成** | T8 IMG/MM 无 3D→text 模型（FORTE 仅脑部） | FORTE 架构迁移或 LLM + 结构化 prompt |
+| **ASPECTS 自动评分** | 脑部 T9 无开源方案（RAPID 商用） | DeepMedic 分割 + 区域 HU 分析 |
+| **端到端 RECIST** | detect-then-track 仅验证肝脏 | nnDetection + ULS23 组装 |
+| **肠梗阻检测** | 腹部专用检测无开源 | 通用病灶检测 + LLM 判断 |
+| **心包积液检测** | 心脏专用无独立工具 | TotalSegmentator 心包分割 + 体积阈值 |
+| **脊柱管狭窄分级** | 无成熟开源方案 | TotalSegmentator 椎管分割 + 截面积计算 |
 
 ---
 
-## 6. 依赖项目汇总
+## 7. 核心依赖项目汇总
 
-以下是所有需要集成的外部项目，按使用频次排序：
+按引用量/重要性排序：
 
-| 项目 | GitHub | 使用次数 | 许可证 |
-|------|--------|---------|--------|
-| **MONAI** | Project-MONAI/MONAI | 5 个工具 | Apache 2.0 |
-| **TotalSegmentator** | wasserth/TotalSegmentator | 3 个工具 | Apache 2.0 |
-| **SimpleITK** | SimpleITK/SimpleITK | 2 个工具 | Apache 2.0 |
-| **nnU-Net v2** | MIC-DKFZ/nnUNet | 1 个工具 | Apache 2.0 |
-| **nnDetection** | MIC-DKFZ/nnDetection | 1 个工具 | Apache 2.0 |
-| **ANTsPy** | ANTsX/ANTsPy | 1 个工具 | Apache 2.0 |
-| **pydicom** | pydicom/pydicom | 2 个工具 | MIT |
-| **RadGraph-XL** | Stanford-AIMI/radgraph | 1 个工具 | PhysioNet 协议 |
-| **medspaCy** | medspacy/medspacy | 1 个工具 | MIT |
-| **NegBio** | ncbi-nlp/NegBio | 1 个工具 | MIT (公共域) |
-| **llm_extractinator** | DIAGNijmegen/llm_extractinator | 2 个工具 | Apache 2.0 |
-| **RadFM** | chaoyi-wu/RadFM | 1 个工具 | — |
-| **FORTE/BrainGPT** | charlierabea/FORTE | 1 个工具 | — |
-| **detect-then-track** | alibool/detect-then-track | 1 个工具 | — |
-| **AI-in-Lung-Health** | fitushar/AI-in-Lung-Health-Benchmarking... | 1 个工具 | — |
-| **tnm-stage-classifier** | tatonetti-lab/tnm-stage-classifier | 1 个工具 | — |
-| **pyradiomics** | AIM-Harvard/pyradiomics | 1 个工具 | BSD |
+| 项目 | 论文 | 发表刊物 | 引用量 | 许可证 | 覆盖工具数 |
+|------|------|---------|--------|--------|-----------|
+| **nnU-Net v2** | Isensee et al. | Nature Methods 2021 | 7000+ | Apache 2.0 | 5+ |
+| **TotalSegmentator** | Wasserthal et al. | Radiology:AI 2023 | 600+ | Apache 2.0 | 6+ |
+| **ANTs/ANTsPy** | Avants et al. | NeuroImage 2011 | 10000+ | Apache 2.0 | 1 |
+| **pyradiomics** | van Griethuysen et al. | Cancer Research 2017 | 3000+ | BSD | 1 |
+| **MONAI** | Cardoso et al. | arXiv 2022 | 300+ | Apache 2.0 | 4 |
+| **SimpleITK** | Lowekamp et al. | Frontiers 2013 | — | Apache 2.0 | 1 |
+| **DeepMedic** | Kamnitsas et al. | MedIA 2017 | 2500+ | BSD | 1 |
+| **nnDetection** | Baumgartner et al. | MICCAI 2021 | 200+ | Apache 2.0 | 1 |
+| **RadFM** | Wu et al. | Nature Comms 2025 | — | — | 1 |
+| **FELIX** | Cao et al. | Nature Medicine 2023 | 150+ | — | 1 |
+| **RadGraph-XL** | Jain et al. | ACL 2024 | — | PhysioNet | 1 |
+| **Sybil** | Mikhael et al. | J Clin Oncol 2023 | — | MIT | 1 |
+| **MedSAM** | Ma et al. | Nature Comms 2024 | 300+ | Apache 2.0 | 1 |
+| **Comp2Comp** | Stanford AIMI | Radiology 2021 | 150+ | — | 1 |
+| **FORTE** | charlierabea | Nature Comms 2025 | — | — | 1 |
+| **llm_extractinator** | van Driel et al. | arXiv 2025 | — | Apache 2.0 | 2 |
+| **pydicom** | Mason et al. | — | — | MIT | 1 |
