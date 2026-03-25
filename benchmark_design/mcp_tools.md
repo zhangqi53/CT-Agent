@@ -77,6 +77,8 @@
 | V03 | `universal_lesion_segmentation` | 全身通用病灶分割 | ULS23 (DIAG, MedIA 2025) + nnU-Net v2 | [ULS23](https://github.com/DIAGNijmegen/ULS23) |
 | V04 | `abnormality_screening` | 全局二分类：正常 vs 异常 | MONAI 3D 分类网络 (DenseNet121/ViT) | [MONAI](https://github.com/Project-MONAI/MONAI) |
 | V05 | `interactive_segmentation` | 基于 prompt（点击/bbox）的交互式 3D 分割 | MedSAM (Ma et al., Nature Comms 2024, 300+ cites) | [MedSAM](https://github.com/bowang-lab/MedSAM) |
+| V06 | `ct_zero_shot_diagnosis` | CT 零样本/少样本异常诊断 | CT-CLIP/CT-RATE (Hamamci et al., 2024) | [CT-CLIP](https://github.com/ibrahimethemhamamci/CT-CLIP) |
+| V07 | `vista3d_segmentation` | 127 类 CT 分割基础模型 | MONAI VISTA3D (CVPR 2025) | [VISTA](https://github.com/Project-MONAI/VISTA) |
 
 ### 3.4 L3 感知层 — 肺部专用工具
 
@@ -85,8 +87,12 @@
 | V-LU01 | `lung_nodule_detection` | 肺结节 3D 检测 | nnDetection (Baumgartner et al., MICCAI 2021, 200+ cites) | [nnDetection](https://github.com/MIC-DKFZ/nnDetection) |
 | V-LU02 | `lung_nodule_segmentation` | 肺结节体素级分割 | nnU-Net (Isensee et al., Nature Methods 2021, 7000+ cites) | [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) |
 | V-LU03 | `lung_lobe_segmentation` | 肺叶分割（5 叶） | TotalSegmentator / MONAI Lung Lobe bundle | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
-| V-LU04 | `pulmonary_embolism_detection` | 肺栓塞检测（CTA） | RSNA PE Detection Challenge (2020, Kaggle) | 多个开源方案 |
-| V-LU05 | `pneumonia_quantification` | 肺炎/COVID 病灶分割与体积量化 | nnU-Net on COVID-19-20 Challenge (MedIA) | [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) |
+| V-LU04 | `pulmonary_embolism_detection` | 肺栓塞检测（CTA） | PENet (Huang et al., npj Digital Medicine 2020, 150+ cites) | [PENet](https://github.com/marshuang80/PENet) |
+| V-LU05 | `pneumonia_quantification` | 肺炎/COVID 病灶分割与体积量化 | Inf-Net (Fan et al., **TMI** 2020, 1500+ cites) | [Inf-Net](https://github.com/DengPingFan/Inf-Net) |
+| V-LU06 | `lung_segmentation` | 鲁棒肺实质分割（含病理肺） | lungmask (Hofmanninger et al., Eur Radiol 2020, 400+ cites) | [lungmask](https://github.com/JoHof/lungmask) |
+| V-LU07 | `airway_segmentation` | 气道树提取与分割 | ATM'22 Challenge (Zhang et al., MedIA 2023) | [ATM'22](https://github.com/Puzzled-Hui/ATM-22-Related-Work) |
+| V-LU08 | `emphysema_quantification` | 肺气肿/COPD 定量（LAA-950/Pi10） | Chest Imaging Platform (Ross et al., BWH/Harvard) | [CIP](https://github.com/acil-bwh/ChestImagingPlatform) |
+| V-LU09 | `lung_nodule_classification` | 肺结节良恶性分类 + 风险预测 | DeepLung (Zhu et al., WACV 2018, 600+ cites) | [DeepLung](https://github.com/wentaozhu/DeepLung) |
 
 ### 3.5 L3 感知层 — 肝脏/腹部专用工具
 
@@ -98,6 +104,8 @@
 | V-LI04 | `lymph_node_detection` | 腹部淋巴结检测 | NIH CADLab (Summers et al., Radiology:AI) | [CADLab](https://github.com/rsummers11/CADLab) |
 | V-LI05 | `aortic_measurement` | 主动脉直径/形态测量 | VMTK (Antiga et al., 800+ cites) | [VMTK](https://github.com/vmtk/vmtk) |
 | V-LI06 | `multi_lesion_detection_tagging` | 多器官病灶联合检测+标签 | MULAN (Yan et al., MICCAI 2019, 150+ cites) | [MULAN](https://github.com/ke-yan/MULAN) |
+| V-LI07 | `pancreas_segmentation` | 胰腺实质分割 | Attention U-Net (Oktay et al., MIDL 2018, 5000+ cites) | [Attention-Gated-Networks](https://github.com/ozan-oktay/Attention-Gated-Networks) |
+| V-LI08 | `pelvic_fracture_detection` | 骨盆骨折检测 | CTPelvic1K (Liu et al., MICCAI 2021) | [CTPelvic1K](https://github.com/ICT-MIRACLE-lab/CTPelvic1K) |
 
 ### 3.6 L3 感知层 — 头颅/脑部专用工具
 
@@ -108,6 +116,8 @@
 | V-BR03 | `brain_lesion_segmentation` | 脑部病灶通用分割 | DeepMedic (Kamnitsas et al., MedIA 2017, 2500+ cites) | [DeepMedic](https://github.com/deepmedic/deepmedic) |
 | V-BR04 | `midline_shift_measurement` | 脑中线偏移测量 (mm) | Wei et al., MICCAI/TMI 2018-2020 | [midline-shift](https://github.com/xf4j/midline-shift) |
 | V-BR05 | `aneurysm_detection` | CTA 脑动脉瘤检测 | Shi et al., **Nature Communications** 2020, 300+ cites | 部分代码公开 |
+| V-BR06 | `hydrocephalus_detection` | 脑室扩张/脑积水检测（Evans Index） | 脑室分割 + 几何分析 | TotalSegmentator + 自建 |
+| V-BR07 | `skull_fracture_detection` | 颅骨骨折检测 | Chilamkurthy et al., **Lancet** 2018 (AUC>0.95) | [AutoImplant](https://github.com/Jianningli/autoimplant) |
 
 ### 3.7 L3 感知层 — 心脏专用工具
 
@@ -116,6 +126,7 @@
 | V-CA01 | `calcium_scoring` | 冠脉钙化积分（Agatston Score） | Lessmann et al., **TMI** 2018, 350+ cites | [CalciumScoring](https://github.com/lessmann/CalciumScoring) |
 | V-CA02 | `coronary_segmentation` | 冠脉树分割（CTA） | ImageCAS (Zeng et al., MedIA 2023) | [ImageCAS](https://github.com/XiaoweiXu/ImageCAS-A-Large-Scale-Dataset-and-Benchmark-for-Coronary-Artery-Segmentation) |
 | V-CA03 | `cardiac_chamber_segmentation` | 心腔分割（4 腔 + 大血管） | MM-WHS (Zhuang & Shen, TMI 2019, 400+ cites) | [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) |
+| V-CA04 | `coronary_centerline_tracking` | 冠脉中心线提取 | Wolterink et al., MedIA 2019, 200+ cites | [coronary-tracking](https://github.com/jmwolterink/coronary-artery-tracking) |
 
 ### 3.8 L3 感知层 — 脊柱/骨骼专用工具
 
@@ -126,6 +137,7 @@
 | V-SP03 | `rib_fracture_detection` | 肋骨骨折检测 + 分类 | RibFrac Challenge (Jin et al., Radiology:AI 2021, MedIA 2024) | [FracNet](https://github.com/M3DV/FracNet) |
 | V-SP04 | `bone_density_estimation` | CT 机会性骨密度估计 | Löffler et al., Radiology 2022; Pickhardt et al., AIM 2013, 700+ cites | TotalSegmentator + HU 分析 |
 | V-SP05 | `body_composition_analysis` | 肌肉/脂肪量化（L3 层面） | Koitka et al., Radiology 2021 / Stanford AIMI | [Comp2Comp](https://github.com/StanfordMIMI/Comp2Comp) |
+| V-SP06 | `cobb_angle_measurement` | 脊柱侧弯 Cobb 角测量 | AASCE Challenge (MICCAI 2019) | [AASCE2019](https://github.com/SHTCyuyh/AASCE2019) |
 
 ### 3.9 L4 定量层
 
@@ -185,19 +197,19 @@
 |------|------|
 | L1 预处理层 | 6 |
 | L2 文本层 | 6 |
-| L3 感知层 — 通用 | 5 |
-| L3 感知层 — 肺部 | 5 |
-| L3 感知层 — 肝脏/腹部 | 6 |
-| L3 感知层 — 头颅/脑部 | 5 |
-| L3 感知层 — 心脏 | 3 |
-| L3 感知层 — 脊柱/骨骼 | 5 |
+| L3 感知层 — 通用 | 7 |
+| L3 感知层 — 肺部 | 9 |
+| L3 感知层 — 肝脏/腹部 | 8 |
+| L3 感知层 — 头颅/脑部 | 7 |
+| L3 感知层 — 心脏 | 4 |
+| L3 感知层 — 脊柱/骨骼 | 6 |
 | L4 定量层 | 3 |
 | L5 融合层 | 2 |
 | L6 推理层 | 4 |
 | L7 输出层 | 4 |
-| **正式工具合计** | **54** |
+| **正式工具合计** | **66** |
 | 干扰工具 | 8 |
-| **总计** | **62** |
+| **总计** | **74** |
 
 ---
 
