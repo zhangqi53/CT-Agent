@@ -100,7 +100,25 @@
 
 ---
 
-## 合计：47 个可直接包装为 MCP 的工具
+---
+
+## G. 新增 pip 可安装工具（有权重，直接推理）
+
+| # | 工具 | 论文 | 安装 | 能力 | 覆盖部位 |
+|---|------|------|------|------|---------|
+| 48 | **PlatiPy** | Chlap & Finnegan, 2023 | `pip install platipy[cardiac]` | 心脏 17 亚结构分割（自动下载 nnUNet 权重） | 心脏(RT CT) |
+| 49 | **MONAILabel** | Diaz-Pinto et al., 2022 | `pip install monailabel` | 交互式标注服务器 + 预训练自动分割模型 | 多器官 |
+| 50 | **body-organ-analysis** | SHIP-AI, Greifswald | `pip install body-organ-analysis` | 全身器官+体成分分割（基于 TotalSegmentator） | 全身 |
+| 51 | **bpreg** | Schuhegger, MIC-DKFZ 2021 | `pip install bpreg` | CT 体区识别（骨盆→头部），Zenodo 权重自动下载 | 全身 |
+| 52 | **TotalSpineSeg** | Warszawer et al., 2025 | `pip install totalspineseg` | 椎体/椎间盘/脊髓/椎管实例分割+标记 | 脊柱 |
+| 53 | **Skellytour** | Wardell, Radiology:AI 2025 | [GitHub](https://github.com/cpwardell/Skellytour) | 骨骼分割 17/38/60 标签（优于 TotalSegmentator） | 骨骼 |
+| 54 | **Comp2Comp** | Blankemeier, arXiv:2302.06568 | [GitHub](https://github.com/StanfordMIMI/Comp2Comp)，HuggingFace 权重自动下载 | 体成分（肌肉/脂肪）+ 骨密度 + 主动脉钙化 | 脊柱/腹部 |
+| 55 | **DeepCAC** | Zeleznik, **Nature Comms** 2021 | [GitHub](https://github.com/AIM-Harvard/DeepCAC)，权重内置 | 冠脉钙化定量（20,084 例验证） | 心脏 |
+| 56 | **AI-CAC** | Hagopian et al. | [GitHub](https://github.com/Raffi-Hagopian/AI-CAC) | 非门控胸部 CT 钙化评分 | 心脏/胸部 |
+
+---
+
+## 合计：56 个可直接包装为 MCP 的工具
 
 | 类别 | 数量 |
 |------|------|
@@ -110,4 +128,5 @@
 | D. 基础模型/backbone | 5 |
 | E. 工具库 | 6 |
 | F. 文本 NLP | 6 |
-| **合计** | **47** |
+| G. 新增 pip 工具 | 9 |
+| **合计** | **56** |
