@@ -177,7 +177,26 @@
 
 ---
 
-## 合计：76 个可直接包装为 MCP 的工具
+### H8. 深度搜索补充
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 77 | **PaNSegNet** | NUBagciLab | [NUBagciLab/PaNSegNet](https://github.com/NUBagciLab/PaNSegNet) | ✅ Google Drive | 胰腺分割（CT+MRI） |
+| 78 | **livermask** | Pedersen & Pérez de Frutos | [andreped/livermask](https://github.com/andreped/livermask) | ✅ pip install | 肝实质分割 (Dice 0.946) |
+
+### 确认不存在的场景（穷尽搜索）
+
+| 场景 | 搜索次数 | 结论 |
+|------|---------|------|
+| 肠梗阻检测 | 8 次 WebSearch | ❌ 无开源工具。最近替代：RSNA 2023 肠损伤(#64) |
+| 阑尾炎检测 | 9 次 WebSearch | ❌ 无。阑尾不在任何现有分割工具标签列表中 |
+| CT 气胸检测 | 9 次 WebSearch | ❌ 无。EFA-Net repo 已 404；仅有 X 光版本 |
+| LI-RADS 自动评分 | 7 次 WebSearch | ❌ 无。论文有但代码全未公开 |
+| 胰腺炎 CTSI | 6 次 WebSearch | ❌ 无。DenseNet 论文(Sci Rep 2023)未释出权重 |
+
+---
+
+## 合计：78 个可直接包装为 MCP 的工具
 
 | 类别 | 数量 |
 |------|------|
@@ -188,5 +207,5 @@
 | E. 工具库 | 6 |
 | F. 文本 NLP | 6 |
 | G. pip 可安装 | 9 |
-| H. 精确搜索新增 | 20 |
-| **合计** | **76** |
+| H. 精确搜索新增 | 22 |
+| **合计** | **78** |
