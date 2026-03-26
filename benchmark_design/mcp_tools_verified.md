@@ -261,4 +261,42 @@
 | G. pip 可安装 | 9 |
 | H. 精确搜索新增 | 22 |
 | I. 第三轮新增 | 26 |
-| **合计** | **104** |
+| J. 第四轮新增 | 13 |
+| **合计** | **117** |
+
+---
+
+## J. 第四轮搜索新增——纵向追踪 / 分期 / 报告 / 文本 / 筛查
+
+### J1. 纵向追踪 (IMG-T6 翻转)
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 105 | **LesionLocator** | Rokuss, **CVPR 2025** + autoPET IV 冠军 | [MIC-DKFZ/LesionLocator](https://github.com/MIC-DKFZ/LesionLocator) | ✅ Zenodo 5-fold | 全身肿瘤纵向追踪（肺/肝/肾/胰/淋巴结） |
+| 106 | **uniGradICON** | Tian, **MICCAI 2024** | [uncbiag/uniGradICON](https://github.com/uncbiag/uniGradICON) | ✅ `pip install` | CT 专用形变配准基础模型（肺/腹部） |
+| 107 | **detect-then-track** | Zhou, JIMM 2025 | [alibool/detect-then-track](https://github.com/alibool/detect-then-track) | ✅ GitHub Releases | RECIST 纵向追踪（肝脏验证） |
+
+### J2. 分期/分级 (IMG-T9 翻转)
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 108 | **GTRNet** | npj Digital Medicine 2025 | [18846068128/AI_CT_GastricCancer_TStaging2025](https://github.com/18846068128/AI_CT_GastricCancer_TStaging2025) | ✅ Zenodo (MIT) | 胃癌 T1-T4 分期 (AUC 0.86-0.95) |
+| 109 | **DL_BoneLesion** | Academic Radiology (NIH) | [NIH-MIP/DL_BoneLesion](https://github.com/NIH-MIP/DL_BoneLesion) | ✅ nnUNet 模型 | 骨转移检测+良恶性分类 (85% acc) |
+
+### J3. 报告生成 / 文本工具
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 110 | **LEAVS** | MICCAI 2025 | [rsummers11/LEAVS](https://github.com/rsummers11/LEAVS) | ✅ Qwen2-72B | 9 腹部器官 × 7 异常文本抽取 (F1 0.89) |
+| 111 | **SARLE** | Rachel Lea | [rachellea/sarle-labeler](https://github.com/rachellea/sarle-labeler) | ✅ 规则引擎 | 83 异常 × 52 部位文本标签抽取 (F-score 0.976) |
+| 112 | **FaMeSumm** | EMNLP 2023 | [psunlpgroup/FaMeSumm](https://github.com/psunlpgroup/FaMeSumm) | ✅ checkpoints | 多器官放射报告摘要（非胸部限定） |
+| 113 | **multi-label-body-ct** | Tushar, Radiology:AI 2022 | [fitushar/multi-label-weakly-supervised-classification-of-body-ct](https://github.com/fitushar/multi-label-weakly-supervised-classification-of-body-ct) | ✅ 规则+DL | 肺/肝胆/肾 3 系统多标签分类 |
+
+### J4. 其他补充
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 114 | **RAMAC** (FDA) | IEEE ICPHM 2024 | [DIDSR/RAMAC](https://github.com/DIDSR/RAMAC) | ✅ 经典算法 | 纵向 CT 病灶匹配（刚性配准+匈牙利算法） |
+| 115 | **LongiSeg** | DKFZ autoPET IV | [MIC-DKFZ/LongiSeg](https://github.com/MIC-DKFZ/LongiSeg) | ✅ pretrain ckpt | 纵向分割（时间差异加权） |
+| 116 | **CT-SAM3D** 已在 I4 | — | — | — | (去重) |
+| 117 | **sato_j-mid_ad 补充验证** | Sato, **eBioMedicine (Lancet)** 2024 | 已在 H5 | ✅ | 确认覆盖脾脏+肾脏+肾上腺 T1 筛查 |
