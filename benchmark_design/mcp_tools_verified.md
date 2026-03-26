@@ -118,7 +118,66 @@
 
 ---
 
-## 合计：56 个可直接包装为 MCP 的工具
+## H. 精确搜索新增——盆腔/胃肠/头颈/肾脏/分期/关键发现
+
+### H1. 盆腔专用
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 57 | **OvSeg** | Buddenkotte, Eur Radiol Exp 2023 | [ThomasBudd/ovseg](https://github.com/ThomasBudd/ovseg) | ✅ 3 模型自动下载 | 卵巢癌 CT 分割（骨盆/网膜/腹腔/淋巴结） |
+| 58 | **FracSegNet** | Liu, MICCAI 2023 + Frontiers Med 2025 | [YzzLiu/FracSegNet](https://github.com/YzzLiu/FracSegNet) | ✅ 权重可下载 | 骨盆骨折分割 (IoU 0.930) |
+| 59 | **U-SAM/CARE** | Zhang, **Comms Medicine (Nature)** 2025 | [kanydao/U-SAM](https://github.com/kanydao/U-SAM) | ✅ 代码+数据 | 直肠癌 CT 分割 (398 例, 33K slices) |
+| 60 | **CTPelvic1K** | Liu, IJCARS 2021 | [MIRACLE-Center/CTPelvic1K](https://github.com/MIRACLE-Center/CTPelvic1K) | ✅ baseline 模型 | 骨盆骨骼分割 (1184 volumes) |
+
+### H2. 胃肠道专用
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 61 | **CT Colonography Polyp** | Wesp, **Eur Radiol** 2022 | [pwesp/deep-learning-in-ct-colonography](https://github.com/pwesp/deep-learning-in-ct-colonography) | ✅ weights/ 目录 | CTC 息肉良恶性分类 (AUC 0.91) |
+
+### H3. 头颈部专用
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 62 | **HiLab Head-Neck-GTV** | Fang et al., StructSeg 2019 | [HiLab-git/Head-Neck-GTV](https://github.com/HiLab-git/Head-Neck-GTV) | ✅ 百度盘权重 | 鼻咽癌 GTV 分割 (Dice 0.65) |
+| 63 | **Parotid Segmentation** | Tyagi, Diagnostics 2023 | [1aryantyagi/Segmentation-Paper](https://github.com/1aryantyagi/Segmentation-Paper) | ✅ 有权重 | 腮腺 CT 分割 (Dice 0.88) |
+
+### H4. 肾脏/脾脏专用
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 64 | **RSNA 2023 Trauma 1st** | Radiology:AI 2024 | [Nischaydnk/RSNA-2023-1st-place-solution](https://github.com/Nischaydnk/RSNA-2023-1st-place-solution) | ✅ 有权重 | 脾脏/肝脏/肾脏损伤分级 (AUC 0.98) |
+| 65 | **KiTS23 2nd Place** | MICCAI 2023 KiTS Challenge | [khuhm/KiTS23-2nd-place](https://github.com/khuhm/KiTS23-2nd-place) | ✅ pretrained_models/ | 肾脏/肿瘤/囊肿分割 |
+| 66 | **AbdomenAtlas** | NeurIPS 2023 | [MrGiovanni/AbdomenAtlas](https://github.com/MrGiovanni/AbdomenAtlas) | ✅ checkpoint 下载 | 25 器官 + 7 肿瘤分割 (9262 volumes) |
+| 67 | **OrganSegRSTN** | Xia et al. | [198808xc/OrganSegRSTN](https://github.com/198808xc/OrganSegRSTN) | ✅ 有权重 | 小器官分割（肾上腺等） |
+
+### H5. 胆囊/多器官异常检测
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 68 | **sato_j-mid_ad** | Sato et al. | [jun-sato/sato_j-mid_ad](https://github.com/jun-sato/sato_j-mid_ad) | ✅ pCloud 权重 | 多器官异常检测（胆结石/息肉/胆管扩张/肝脏等） |
+
+### H6. 分期/分级
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 69 | **StrokeViT** | arXiv | [rishiraj-cs/StrokeViT_With_AutoML](https://github.com/rishiraj-cs/StrokeViT_With_AutoML) | ✅ 权重内置 | ASPECTS 卒中评分 |
+| 70 | **Acute-stroke Pipeline** | Liu et al. | [Chin-Fu-Liu/Acute-stroke_Detection_Segmentation](https://github.com/Chin-Fu-Liu/Acute-stroke_Detection_Segmentation) | ✅ .h5 权重 | 卒中检测+分割 (CPU 20-30s) |
+| 71 | **NoduleNet** | Tang, MICCAI 2019 | [uci-cbcl/NoduleNet](https://github.com/uci-cbcl/NoduleNet) | ✅ Google Drive | 肺结节检测+分割 (Fleischner 前置) |
+| 72 | **RadiomicsLiverFibrosis** | IMICSLab | [IMICSLab/RadiomicsLiverFibrosisDetection](https://github.com/IMICSLab/RadiomicsLiverFibrosisDetection) | ✅ 模型公开 | 肝纤维化 CT 分级 |
+| 73 | **MI_prediction** | Omarraita | [Omarraita/MI_prediction](https://github.com/Omarraita/MI_prediction) | ✅ 预训练模型 | 冠脉狭窄→心梗预测 |
+
+### H7. 关键发现检测
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 74 | **VCFNet** | Xiong, Frontiers Endocrinol 2023 | [Xiongyuchao/VCFNet](https://github.com/Xiongyuchao/VCFNet) | ✅ 模型+评估代码 | 椎体压缩骨折分类 |
+| 75 | **Maskrcnn_RibFrac** | ESWA 2025 | [sshuaichai/Maskrcnn_RibFrac](https://github.com/sshuaichai/Maskrcnn_RibFrac) | ✅ PyTorch 权重 | 肋骨骨折检测 (>97% acc) |
+| 76 | **PACT-3D** | **Nature Comms** 2024 | [IMinChiu/pact-3d](https://github.com/IMinChiu/pact-3d) | ⚠️ 需确认 | 气腹(游离气体)检测 (Sens 0.81-0.98) |
+
+---
+
+## 合计：76 个可直接包装为 MCP 的工具
 
 | 类别 | 数量 |
 |------|------|
@@ -128,5 +187,6 @@
 | D. 基础模型/backbone | 5 |
 | E. 工具库 | 6 |
 | F. 文本 NLP | 6 |
-| G. 新增 pip 工具 | 9 |
-| **合计** | **56** |
+| G. pip 可安装 | 9 |
+| H. 精确搜索新增 | 20 |
+| **合计** | **76** |
