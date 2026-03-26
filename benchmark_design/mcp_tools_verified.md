@@ -263,7 +263,21 @@
 | I. 第三轮新增 | 26 |
 | J. 第四轮新增 | 13 |
 | K. 第五轮新增 | 2 |
-| **合计** | **119** |
+| L. 适配/胶水工具 | 6 |
+| **合计** | **125** |
+
+---
+
+## L. 适配/胶水工具（pip 安装，无需模型权重）
+
+| # | 工具 | 安装 | 功能 |
+|---|------|------|------|
+| 120 | **dicom2nifti** | `pip install dicom2nifti` | DICOM→NIfTI 纯 Python 转换 |
+| 121 | **cc3d** | `pip install connected-components-3d` | 3D 连通域分析/小物体过滤/最大K保留 |
+| 122 | **highdicom** | `pip install highdicom` | DICOM SR/SEG/参数图创建（TID1500 支持） |
+| 123 | **fhirpy** | `pip install fhirpy fhir.resources` | HL7 FHIR R4 资源创建/导出（DiagnosticReport） |
+| 124 | **TorchIO** | `pip install torchio` | 3D 医学图像预处理/增强流水线 |
+| 125 | **nibabel** | `pip install nibabel` | NIfTI/MGZ/CIFTI 读写（神经影像格式） |
 
 ---
 
