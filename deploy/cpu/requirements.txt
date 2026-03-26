@@ -1,0 +1,36 @@
+# === Core ===
+fastapi==0.115.*
+uvicorn[standard]==0.34.*
+pydantic>=2.0
+
+# === Medical Image I/O ===
+SimpleITK>=2.3
+nibabel>=5.0
+pydicom>=2.4
+numpy>=1.24
+scipy>=1.11
+scikit-image>=0.22
+
+# === Radiomics ===
+pyradiomics>=3.1
+
+# === NLP ===
+medspacy>=1.0
+# negbio  # may need separate install
+
+# === Post-processing ===
+connected-components-3d>=3.0
+
+# === Format conversion ===
+dicom2nifti>=2.4
+highdicom>=0.22
+
+# === FHIR ===
+fhirpy>=2.0
+fhir.resources>=7.0
+
+# === Preprocessing ===
+torchio>=0.19
+
+# === Utilities ===
+requests>=2.31
