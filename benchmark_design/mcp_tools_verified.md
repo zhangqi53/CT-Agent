@@ -262,7 +262,32 @@
 | H. 精确搜索新增 | 22 |
 | I. 第三轮新增 | 26 |
 | J. 第四轮新增 | 13 |
-| **合计** | **117** |
+| K. 第五轮新增 | 2 |
+| **合计** | **119** |
+
+---
+
+## K. 第五轮搜索新增
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 118 | **Med3DVLM** | Xin, IEEE JBHI 2025 | [mirthAI/Med3DVLM](https://github.com/mirthAI/Med3DVLM) | ✅ [HuggingFace](https://huggingface.co/MagicXin/Med3DVLM-Qwen-2.5-7B) | 3D CT VLM（VQA/报告/检索），大幅优于 M3D-LaMed |
+| 119 | **BiomedGPT** | Zhang, **Nature Medicine** 2024 | [taokz/BiomedGPT](https://github.com/taokz/BiomedGPT) | ✅ Dropbox (学术) | 通用生物医学多模态模型（2D+3D+文本） |
+
+### Merlin 验证范围纠正
+
+> ⚠️ **重要纠正**：Merlin (Nature 2026) 训练数据仅覆盖**腹部 CT**（下胸→骨盆）。
+> **不覆盖**：脑/颅内、头颈部、上胸部。之前矩阵将 Merlin 标注为脑/头颈的工具是**错误的**。
+>
+> Merlin 验证过的部位：肝脏、胆囊、脾脏、胰腺、肾上腺、肾脏、胃肠道、盆腔、下胸腔、血管/淋巴结
+
+### MM 层确认缺口
+
+| 任务 | 状态 | 说明 |
+|------|------|------|
+| **MM-T7 多模态纵向** | ❌ 全球无工具 | 没有任何工具能同时融合纵向 CT 影像+历史报告进行对比 |
+| **MM-T9 多模态分期** | ❌ 全球无工具 | 没有任何工具能结合影像+临床信息输出 TNM/AJCC 分期 |
+| **MM-T10 多模态鉴别诊断** | ⚠️ 仅 RadFM 通用 | RadFM 可做但未在任何部位专门验证过鉴别诊断能力 |
 
 ---
 
