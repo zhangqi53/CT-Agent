@@ -1,0 +1,22 @@
+{
+  "name": "ct-agent-mcp-server",
+  "version": "0.1.0",
+  "description": "CT-Agent MCP Tool Server - 125 medical CT analysis tools",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "start:gpu": "MCP_PORT=35677 MCP_ROLE=gpu node dist/index.js",
+    "start:cpu": "MCP_PORT=35678 MCP_ROLE=cpu node dist/index.js",
+    "start:gateway": "MCP_PORT=35679 MCP_ROLE=gateway node dist/index.js",
+    "build:log": "tsc 2>&1 | tee build.log && echo 'BUILD_SUCCESS' >> build.log || echo 'BUILD_FAILED' >> build.log"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "zod": "^4.3.6"
+  }
+}

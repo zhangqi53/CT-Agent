@@ -1,0 +1,82 @@
+version: "3.8"
+
+services:
+  gpu-main:
+    build:
+      context: ./gpu-main
+      dockerfile: Dockerfile
+    container_name: ct-agent-gpu
+    ports:
+      - "35677:35677"
+    volumes:
+      - model-cache:/root/.totalsegmentator
+      - model-cache:/root/.cache
+      - shared-data:/data
+      - gpu-logs:/app/logs
+    environment:
+      - PORT=35677
+      - LOG_DIR=/app/logs
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:35677/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+
+  cpu:
+    build:
+      context: ./cpu
+      dockerfile: Dockerfile
+    container_name: ct-agent-cpu
+    ports:
+      - "35678:35678"
+    volumes:
+      - shared-data:/data
+      - cpu-logs:/app/logs
+    environment:
+      - PORT=35678
+      - LOG_DIR=/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:35678/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  mcp-gateway:
+    build:
+      context: ../mcp-server
+      dockerfile: ../deploy/gateway/Dockerfile
+    container_name: ct-agent-gateway
+    ports:
+      - "35679:35679"
+    volumes:
+      - gateway-logs:/app/logs
+    environment:
+      - MCP_PORT=35679
+      - GPU_BACKEND_URL=http://gpu-main:35677
+      - CPU_BACKEND_URL=http://cpu:35678
+      - LOG_DIR=/app/logs
+    depends_on:
+      gpu-main:
+        condition: service_healthy
+      cpu:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  model-cache:
+  shared-data:
+  gpu-logs:
+  cpu-logs:
+  gateway-logs:

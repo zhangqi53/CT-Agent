@@ -1,0 +1,36 @@
+# === Core ===
+fastapi==0.115.*
+uvicorn[standard]==0.34.*
+pydantic>=2.0
+
+# === Medical Image I/O ===
+SimpleITK>=2.3
+nibabel>=5.0
+pydicom>=2.4
+numpy>=1.24
+scipy>=1.11
+
+# === Segmentation Tools (pip-installable) ===
+TotalSegmentator>=2.0
+lungmask>=0.2
+totalspineseg>=0.1
+# ovseg  # pip install ovseg
+# livermask  # pip install livermask
+
+# === Detection/Classification ===
+blast-ct>=2.0
+
+# === MONAI ecosystem ===
+monai[all]>=1.3
+
+# === Registration ===
+# antspyx  # heavy, install separately if needed
+
+# === Radiomics ===
+pyradiomics>=3.1
+
+# === Utilities ===
+connected-components-3d>=3.0
+dicom2nifti>=2.4
+torchio>=0.19
+requests>=2.31
