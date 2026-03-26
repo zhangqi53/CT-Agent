@@ -71,7 +71,7 @@
 |------|--------|------------------------|------------|----------|
 | **IMG-T1 异常筛查** | DeepLesion (通用) | Yan et al., J Med Imaging 2018 | https://github.com/rsummers11/CADLab | Sens 0.84 @ 4 FP/vol |
 | | CT-CLIP (zero-shot, 胸部为主) | Hamamci et al., arXiv 2024 | https://github.com/ibrahimethemhamamci/CT-CLIP | 18 pathology zero-shot |
-| **IMG-T2 病灶检测/定位** | DeepLesion / MULAN | Yan et al., MICCAI 2019 | https://github.com/ke-yan/MULAN | 多器官病灶联合检测 |
+| **IMG-T2 病灶检测/定位** | DeepLesion / MULAN | Yan et al., MICCAI 2019 | https://github.com/rsummers11/CADLab | 多器官病灶联合检测 |
 | | ALIEN (胃癌) | Chen et al., Biomed Signal Process Control 2024 | https://github.com/ZHChen-294/ALIEN | 胃癌 CT 3D 分割 |
 | **IMG-T3 病灶分割** | nnU-Net (通用框架) | Isensee et al., Nature Methods 2021 | https://github.com/MIC-DKFZ/nnUNet | SOTA on 多项 GI 分割 |
 | | ULS23 (通用病灶分割) | de Grauw et al., MedIA 2025 | https://github.com/DIAGNijmegen/ULS23 | Dice 0.703; 含 colon/pancreas lesions |
@@ -122,7 +122,7 @@
 | 任务 | 工具名 | 论文 (作者, 期刊, 年份) | GitHub URL | 关键指标 |
 |------|--------|------------------------|------------|----------|
 | **IMG-T1 异常筛查** | DeepLesion (通用) | Yan et al., J Med Imaging 2018 | https://github.com/rsummers11/CADLab | Sens 0.84 @ 4 FP/vol |
-| **IMG-T2 病灶检测/定位** | DeepLesion / MULAN | Yan et al., MICCAI 2019 | https://github.com/ke-yan/MULAN | 多器官联合检测+标签 |
+| **IMG-T2 病灶检测/定位** | DeepLesion / MULAN | Yan et al., MICCAI 2019 | https://github.com/rsummers11/CADLab | 多器官联合检测+标签 |
 | | FracSegNet (骨盆骨折) | Liu et al., Frontiers in Medicine 2025 | https://github.com/YzzLiu/FracSegNet | PENGWIN IoU 0.930 (top) |
 | | OvSeg (卵巢癌) | Buddenkotte et al., Eur Radiol Exp 2023 | https://github.com/ThomasBudd/ovseg | DSC 0.71 (pelvic/ovarian) |
 | **IMG-T3 病灶分割** | CTPelvic1K (骨盆骨) | Liu et al., IJCARS 2021 | https://github.com/MIRACLE-Center/CTPelvic1K | Dice 0.987 (metal-free pelvic bone) |

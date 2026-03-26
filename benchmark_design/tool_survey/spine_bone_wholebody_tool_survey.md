@@ -123,7 +123,7 @@
 |------|------|-------|--------|------------|
 | **IMG-T1** Anomaly screening | CT-CLIP | Hamamci et al., *ECCV* 2024 | https://github.com/ibrahimethemhamamci/CT-CLIP | Zero-shot whole-body CT abnormality screening |
 | **IMG-T2** Lesion detection (universal) | DeepLesion | Yan et al., *J Med Imaging* 2018, 400+ cites | https://github.com/rsummers11/CADLab | 32,735 lesion annotations across body; universal 3D bbox detection |
-| **IMG-T2** Lesion detection (universal) | MULAN | Yan et al., *MICCAI* 2019, 150+ cites | https://github.com/ke-yan/MULAN | Multi-organ lesion detection + automatic tagging |
+| **IMG-T2** Lesion detection (universal) | MULAN | Yan et al., *MICCAI* 2019, 150+ cites | https://github.com/rsummers11/CADLab | Multi-organ lesion detection + automatic tagging |
 | **IMG-T3** Lesion segmentation (universal) | ULS23 | DIAG, *MedIA* 2025 | https://github.com/DIAGNijmegen/ULS23 | Universal lesion segmentation challenge; nnU-Net based |
 | **IMG-T3** Lesion segmentation | nnU-Net | Isensee et al., *Nature Methods* 2021, 7000+ cites | https://github.com/MIC-DKFZ/nnUNet | Self-configuring; SOTA on 23+ benchmarks |
 | **IMG-T3** Lesion segmentation | MedSAM | Ma et al., *Nature Communications* 2024 | https://github.com/bowang-lab/MedSAM | Prompt-based universal 3D segmentation, DSC 0.87 |
@@ -209,5 +209,5 @@
 | RadGPT | Bassi et al., *ICCV* 2025 | https://github.com/MrGiovanni/RadGPT | Whole-body (abdomen) |
 | TNM Stage Classifier | Tatonetti Lab, *Nature Communications* | https://github.com/tatonetti-lab/tnm-stage-classifier | Whole-body (MM staging) |
 | detect-then-track | alibool, *JIMM* 2025 | https://github.com/alibool/detect-then-track | Whole-body (RECIST tracking) |
-| MULAN | Yan et al., *MICCAI* 2019 | https://github.com/ke-yan/MULAN | Whole-body (multi-lesion) |
-| AASCE2019 (Cobb angle) | AASCE Challenge, *MICCAI* 2019 | https://github.com/SHTCyuyh/AASCE2019 | Spine (scoliosis; X-ray based, not CT) |
+| MULAN | Yan et al., *MICCAI* 2019 | https://github.com/rsummers11/CADLab | Whole-body (multi-lesion) |
+| AASCE2019 (Cobb angle) | AASCE Challenge, *MICCAI* 2019 | https://github.com/hust-linyi/Seg4Reg | Spine (scoliosis; X-ray based, not CT) |

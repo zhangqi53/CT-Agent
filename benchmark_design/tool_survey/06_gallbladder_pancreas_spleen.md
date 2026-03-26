@@ -109,7 +109,7 @@
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
 | NegBio | Peng et al., EMNLP Workshop, 2018 | https://github.com/bionlplab/negbio2 | 否定/不确定检测, 辅助标签提取 |
-| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/FJDorfworner/llm_extractinator | LLM-based structured label extraction |
+| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/DIAGNijmegen/llm_extractinator | LLM-based structured label extraction |
 
 ---
 
@@ -117,7 +117,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/FJDorfner/llm_extractinator | 报告中结构化测量值提取 |
+| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/DIAGNijmegen/llm_extractinator | 报告中结构化测量值提取 |
 
 ---
 
@@ -131,7 +131,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| RadGPT | Doshi et al., arXiv 2024 | https://github.com/radgpt/radgpt | LLM-based放射报告生成/摘要 |
+| RadGPT | Doshi et al., arXiv 2024 | https://github.com/MrGiovanni/RadGPT | LLM-based放射报告生成/摘要 |
 
 ---
 
@@ -189,7 +189,7 @@
 
 | 工具名 | 论文 | GitHub | 关键指标 |
 |--------|------|--------|----------|
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | 胰腺癌早期筛查; 非造影CT; AUC 0.986; 超越放射科医师 |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 | CT-CLIP | Hamamci et al., Nature Biomedical Engineering, 2026 | https://github.com/ibrahimethemhamamci/CT-CLIP | Zero-shot多异常检测 |
 
 ---
@@ -198,7 +198,7 @@
 
 | 工具名 | 论文 | GitHub | 关键指标 |
 |--------|------|--------|----------|
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | 胰腺肿瘤检测, 敏感度 92.9%, 特异度 98.5% |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 | nnU-Net (MSD Task07) | Isensee et al., Nature Methods, 2021 | https://github.com/MIC-DKFZ/nnUNet | Medical Segmentation Decathlon Task07 Pancreas; 肿瘤检测基线 |
 
 ---
@@ -211,7 +211,7 @@
 | TotalSegmentator | Wasserthal et al., Radiology: AI, 2023 | https://github.com/wasserth/TotalSegmentator | 胰腺分割, DSC ~0.83 |
 | Attention U-Net | Oktay et al., MIDL 2018 | https://github.com/ozan-oktay/Attention-Gated-Networks | 注意力门控机制胰腺分割, DSC 提升显著 |
 | MedSAM | Ma et al., Nature Communications, 2024 | https://github.com/bowang-lab/MedSAM | 通用医学分割, prompt-based |
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | 胰腺+肿瘤联合分割 |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 
 ---
 
@@ -219,7 +219,7 @@
 
 | 工具名 | 论文 | GitHub | 关键指标 |
 |--------|------|--------|----------|
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | PDAC vs 正常 vs 其他胰腺病变分类 |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 
 ---
 
@@ -272,7 +272,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | 胰腺癌早期发现 |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 | CT-CLIP | Hamamci et al., Nature Biomedical Engineering, 2026 | https://github.com/ibrahimethemhamamci/CT-CLIP | Zero-shot关键异常标记 |
 
 ---
@@ -299,7 +299,7 @@
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
 | NegBio | Peng et al., EMNLP Workshop, 2018 | https://github.com/bionlplab/negbio2 | 否定/不确定检测 |
-| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/FJDorfner/llm_extractinator | LLM-based结构化标签提取 |
+| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/DIAGNijmegen/llm_extractinator | LLM-based结构化标签提取 |
 
 ---
 
@@ -307,7 +307,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/FJDorfner/llm_extractinator | 报告测量值结构化提取 |
+| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/DIAGNijmegen/llm_extractinator | 报告测量值结构化提取 |
 
 ---
 
@@ -321,7 +321,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| RadGPT | Doshi et al., arXiv 2024 | https://github.com/radgpt/radgpt | LLM-based报告生成/摘要 |
+| RadGPT | Doshi et al., arXiv 2024 | https://github.com/MrGiovanni/RadGPT | LLM-based报告生成/摘要 |
 
 ---
 
@@ -335,7 +335,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | 影像+临床信息融合分类 |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 
 ---
 
@@ -370,7 +370,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| FELIX | Chen et al., Nature Medicine, 2023 | https://github.com/chencancan1018/FELIX | 胰腺癌早期关键发现 |
+| ❌ FELIX 代码未公开 | Chen et al., Nature Medicine 2023 | 代码未公开 — 已从工具列表移除 | — |
 | CT-CLIP | Hamamci et al., Nature Biomedical Engineering, 2026 | https://github.com/ibrahimethemhamamci/CT-CLIP | Zero-shot异常标记 |
 
 ---
@@ -483,7 +483,7 @@
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
 | NegBio | Peng et al., EMNLP Workshop, 2018 | https://github.com/bionlplab/negbio2 | 否定/不确定检测 |
-| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/FJDorfner/llm_extractinator | LLM-based结构化标签提取 |
+| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/DIAGNijmegen/llm_extractinator | LLM-based结构化标签提取 |
 
 ---
 
@@ -491,7 +491,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/FJDorfner/llm_extractinator | 报告测量值提取 |
+| llm_extractinator | Dorfner et al., Radiology: AI, 2025 | https://github.com/DIAGNijmegen/llm_extractinator | 报告测量值提取 |
 
 ---
 
@@ -505,7 +505,7 @@
 
 | 工具名 | 论文 | GitHub | 备注 |
 |--------|------|--------|------|
-| RadGPT | Doshi et al., arXiv 2024 | https://github.com/radgpt/radgpt | LLM-based报告生成/摘要 |
+| RadGPT | Doshi et al., arXiv 2024 | https://github.com/MrGiovanni/RadGPT | LLM-based报告生成/摘要 |
 
 ---
 
@@ -562,7 +562,7 @@
 | 区域 | 专用工具数 | 最强专用工具 | 主要空白 |
 |------|-----------|-------------|---------|
 | 胆囊/胆道 | 0 | 无 (仅有通用工具覆盖) | 检测、分类、分期、纵向全部缺失 |
-| 胰腺 | 1 (FELIX) | FELIX (Nature Medicine 2023) - 筛查/检测/分割/分类 | 分期、纵向、DDx |
+| 胰腺 | 0 | FELIX (Nature Medicine 2023) - 筛查/检测/分割/分类 | 分期、纵向、DDx |
 | 脾脏 | 0 | 无 (TotalSegmentator/nnU-Net分割表现优异) | 检测、分类、分期、纵向全部缺失 |
 
-> **关键发现**: 胰腺是三个区域中开源工具生态最丰富的,FELIX为Nature Medicine级别的端到端胰腺癌筛查工具。胆囊和脾脏高度依赖通用工具(TotalSegmentator, nnU-Net)进行分割,其余任务几乎无专用开源工具。
+> **关键发现**: 胰腺是三个区域中开源工具生态最丰富的,FELIX(Nature Medicine 2023)代码未公开，胰腺实际仅有Attention U-Net和nnU-Net MSD Task07可用。胆囊和脾脏高度依赖通用工具(TotalSegmentator, nnU-Net)进行分割,其余任务几乎无专用开源工具。

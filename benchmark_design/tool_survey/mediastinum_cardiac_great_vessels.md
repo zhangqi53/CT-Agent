@@ -25,7 +25,7 @@
 | Lessmann CalciumScoring | Lessmann et al., **IEEE TMI** 2018 | https://github.com/qurAI-amsterdam/calcium-scoring | Automatic coronary/aortic/valve calcium detection in low-dose chest CT; trained on 1,744 NLST scans |
 | SEGMENT-CACS | Follmer et al., **Insights into Imaging** 2024 | https://github.com/Berni1557/SEGMENT-CACS | Segment-level CAC scoring; weighted Cohen kappa 0.808 on 455-patient test set from 26-center DISCHARGE trial |
 | DeepLesion (universal) | Yan et al., **J Med Imaging** 2018 | https://github.com/rsummers11/CADLab | Universal lesion detection (32,735 lesions); covers mediastinal lesions |
-| MULAN | Yan et al., **MICCAI** 2019 | https://github.com/ke-yan/MULAN | Multi-organ lesion detection + tagging; includes mediastinal/cardiac region |
+| MULAN | Yan et al., **MICCAI** 2019 | https://github.com/rsummers11/CADLab | Multi-organ lesion detection + tagging; includes mediastinal/cardiac region |
 
 ---
 
@@ -70,7 +70,7 @@
 | TotalSegmentator | Wasserthal et al., **Radiology:AI** 2023 | https://github.com/wasserth/TotalSegmentator | 117 structures incl. 4 cardiac chambers, aorta, pulmonary artery; Dice 0.87-0.94 for cardiac |
 | MONAI VISTA3D | MONAI Consortium, **CVPR** 2025 | https://github.com/Project-MONAI/VISTA | 127-class CT segmentation foundation model; includes cardiac/vascular structures |
 | PlatiPy (cardiac substructures) | Finnegan et al., **Phys Eng Sci Med** 2023 | https://github.com/pyplati/platipy | 18 cardiac substructures (chambers, great vessels, valves, coronary ostia); DSC 0.81-0.93 for chambers |
-| ImageCAS | Zeng et al., **Comput Med Imaging Graph** 2023 | https://github.com/XiaoweiXu/ImageCAS-A-Large-Scale-Dataset-and-Benchmark-for-Coronary-Artery-Segmentation | Coronary artery tree segmentation from CTA; 1,000-case dataset + benchmark |
+| ImageCAS | Zeng et al., **Comput Med Imaging Graph** 2023 | https://github.com/XiaoweiXu/ImageCAS-A-Large-Scale-Dataset-and-Benchmark-for-Coronary-Artery-Segmentation-based-on-CT | Coronary artery tree segmentation from CTA; 1,000-case dataset + benchmark |
 | CNNTracker (coronary centerline) | Wolterink et al., **Medical Image Analysis** 2019 | https://github.com/iolag/CNNTracker | Coronary centerline extraction; 93.7% overlap with reference, 0.21 mm mean error |
 
 ---
