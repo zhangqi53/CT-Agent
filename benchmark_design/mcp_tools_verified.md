@@ -196,7 +196,59 @@
 
 ---
 
-## 合计：78 个可直接包装为 MCP 的工具
+---
+
+## I. 第三轮搜索新增——检测/分类/比赛方案/中文平台
+
+### I1. 检测工具（有权重）
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 79 | **nnDetection (淋巴结)** | Baumgartner, MICCAI 2021 | [MIC-DKFZ/nnDetection](https://github.com/MIC-DKFZ/nnDetection) Task025 | ✅ 有下载链接 | 淋巴结 3D 检测 |
+| 80 | **ct_mediastinal_structures** | Bouget et al. | [dbouget/ct_mediastinal_structures_segmentation](https://github.com/dbouget/ct_mediastinal_structures_segmentation) | ✅ 多个模型 + Docker | 纵隔淋巴结分割+检测 |
+| 81 | **Ascites Model** | Summers, Radiology:AI 2024 | [rsummers11/Ascites](https://github.com/rsummers11/Ascites) + [HuggingFace](https://huggingface.co/farrell236/AscitesModel) | ✅ HuggingFace | 腹水检测+体积量化 |
+| 82 | **pleuraleffusion** | Sexauer, Invest Radiol 2022 | [usb-radiology/pleuraleffusion](https://github.com/usb-radiology/pleuraleffusion) | ✅ nnU-Net 模型 | 胸腔积液检测+分割+分类 |
+| 83 | **liver lesion detection** | Bellver, NIPS ML4H 2017 | [imatge-upc/liverseg-2017-nipsws](https://github.com/imatge-upc/liverseg-2017-nipsws) | ✅ checkpoints | 肝脏病灶检测（含检测分支） |
+
+### I2. 分类工具（有权重）
+
+| # | 工具 | 论文 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 84 | **PanDx** | Han Liu, PANORAMA 1st | [han-liu/PanDx](https://github.com/han-liu/PanDx) | ✅ 有模型 | 胰腺癌检测 (AUROC 0.926) |
+| 85 | **CE-CT PDAC Detection** | DIAG Nijmegen | [DIAGNijmegen/CE-CT_PDAC_AutomaticDetection_nnUnet](https://github.com/DIAGNijmegen/CE-CT_PDAC_AutomaticDetection_nnUnet) | ✅ 10 个模型 | PDAC 自动检测 (242 例) |
+| 86 | **AI-in-Lung-Health** | Tushar et al. | [fitushar/AI-in-Lung-Health...](https://github.com/fitushar/AI-in-Lung-Health-Benchmarking-Detection-and-Diagnostic-Models-Across-Multiple-CT-Scan-Datasets) | ✅ 多种 backbone | 肺结节恶性分类 (AUC 0.71-0.90) |
+| 87 | **Kidney Tumor Clf** | Alzubi et al. | [DaliaAlzubi/Kidney_Tumor_Detection_And_Classification](https://github.com/DaliaAlzubi/Kidney_Tumor_Detection_And_Classification) | ✅ CNN/ResNet/VGG | 肾脏肿瘤检测+分类 (97% det) |
+| 88 | **Lung Nodule Clf** | Fazil-kagdi | [Fazil-kagdi/lung-nodule-segmentation-classification](https://github.com/Fazil-kagdi/lung-nodule-segmentation-classification) | ✅ UNet+ResNet18 | 肺结节分割+恶性分类 (~85%) |
+
+### I3. Grand Challenge 比赛方案（有权重）
+
+| # | 工具 | 比赛 | GitHub | 权重 | 能力 |
+|---|------|------|--------|------|------|
+| 89 | **FLARE22 Champion** | FLARE 2022 | [Ziyan-Huang/FLARE22](https://github.com/Ziyan-Huang/FLARE22) | ✅ 百度盘 | 腹部 13 器官分割 |
+| 90 | **HECKTOR 2020 Winner** | HECKTOR | [iantsen/hecktor](https://github.com/iantsen/hecktor) | ✅ 8 fold 权重 | 头颈肿瘤 PET/CT 分割 |
+| 91 | **autoPET III (DKFZ)** | autoPET | [MIC-DKFZ/autopet-3-submission](https://github.com/MIC-DKFZ/autopet-3-submission) | ✅ checkpoint | 全身肿瘤 PET/CT 分割 |
+| 92 | **SEG.A Winner** | SEG.A 2023 | [MWod/SEGA_MW_2023](https://github.com/MWod/SEGA_MW_2023) | ✅ 预训练模型 | 主动脉分割 (Dice 0.920) |
+| 93 | **STOIC 2nd Place** | STOIC 2021 | [KieDani/Submission_2nd_Covid19_Competition](https://github.com/KieDani/Submission_2nd_Covid19_Competition) | ✅ download script | COVID 严重程度预测 |
+| 94 | **AbdomenCT-1K** | AbdomenCT-1K | [JunMa11/AbdomenCT-1K](https://github.com/JunMa11/AbdomenCT-1K) | ✅ baseline 模型 | 肝/肾/脾/胰分割 (1K+ 例) |
+| 95 | **Parse2022** | Parse 2022 | [MICLab-Unicamp/medseg](https://github.com/MICLab-Unicamp/medseg) | ✅ .ckpt 权重 | 肺动脉分割 |
+| 96 | **LUNA16** | LUNA16 | [nauyan/Luna16](https://github.com/nauyan/Luna16) | ✅ Google Drive | 肺结节检测 |
+
+### I4. 中文平台 + 基础模型
+
+| # | 工具 | 论文 | GitHub / 平台 | 权重 | 能力 |
+|---|------|------|-------------|------|------|
+| 97 | **CT-SAM3D** (达摩院) | Alibaba DAMO | [alibaba-damo-academy/ct-sam3d](https://github.com/alibaba-damo-academy/ct-sam3d) + ModelScope | ✅ ModelScope 下载 | 107 类交互式 3D 分割 |
+| 98 | **STU-Net** | arXiv:2304.06716 | [uni-medical/STU-Net](https://github.com/uni-medical/STU-Net) | ✅ S/B/L/H 全尺寸 | 最大 1.4B 参数 CT 分割 |
+| 99 | **MIS-FM** | OpenMEDLab | [openmedlab/MIS-FM](https://github.com/openmedlab/MIS-FM) | ✅ Google Drive | 腹部+胸部分割预训练 |
+| 100 | **CT-GRAPH** | ICCV Workshop 2025 | [hakal104/CT-GRAPH](https://github.com/hakal104/CT-GRAPH) | ✅ LoRA 权重 | 解剖引导 CT 报告生成 (+7.9% F1) |
+| 101 | **UniverSeg** | ICCV 2023 | [JJGO/UniverSeg](https://github.com/JJGO/UniverSeg) | ✅ `universeg(pretrained=True)` | 少样本分割（无需重训） |
+| 102 | **Models Genesis** | MICCAI 2019 Best + MEDIA 2020 | [MrGiovanni/ModelsGenesis](https://github.com/MrGiovanni/ModelsGenesis) | ✅ 2D+3D 权重 | 经典 CT 自监督预训练 (1000+ cites) |
+| 103 | **PUMIT** | arXiv | [function2-llx/PUMIT](https://github.com/function2-llx/PUMIT) | ✅ GitHub Releases | 通用医学图像 Transformer (55 数据集) |
+| 104 | **GrayNet** | MGH-LMIC | [MGH-LMIC/graynet_keras](https://github.com/MGH-LMIC/graynet_keras) | ✅ Keras 权重 | CT 专用 DenseNet121 预训练 |
+
+---
+
+## 合计：104 个可直接包装为 MCP 的工具
 
 | 类别 | 数量 |
 |------|------|
@@ -208,4 +260,5 @@
 | F. 文本 NLP | 6 |
 | G. pip 可安装 | 9 |
 | H. 精确搜索新增 | 22 |
-| **合计** | **78** |
+| I. 第三轮新增 | 26 |
+| **合计** | **104** |
